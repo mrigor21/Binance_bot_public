@@ -56,10 +56,6 @@ class Bot:
         self.orders_to_keep_trying = []
         self.stop_loss = creds['stop_loss'] # %
         self.take_profit = creds['take_profit'] # %
-        # open_long = "(self.stocks.Low[t][i] > self.stocks.Low[t][i-1]) and (self.stocks.Low[t][i-1] in self.stocks.Low[t][0:i-1].unique())" # 1 тип уровня
-        # open_short = "(self.stocks.High[t][i] < self.stocks.High[t][i-1]) and (self.stocks.High[t][i-1] in self.stocks.High[t][0:i-1].unique())" # 1 тип уровня
-        # open_long = "False"
-        # open_short = "True"
         self.conditions = pd.Series([creds['open_long'], creds['open_short']], index=['Open_long', 'Open_short'], dtype="str")
         info = [item for item in self.client.futures_exchange_info()['symbols'] if item['symbol'] in self.tickers]
         self.precision = pd.DataFrame(info).set_index('symbol')[['pricePrecision', 'quantityPrecision']]
